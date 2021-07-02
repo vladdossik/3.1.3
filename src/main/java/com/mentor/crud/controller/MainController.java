@@ -38,23 +38,19 @@ public class MainController {
     }
 
 
- @GetMapping(value = "/admin/new")
-   public String addUser(ModelMap modelMap) {
-     modelMap.addAttribute("addUser", new User());
-     modelMap.addAttribute("allRoles", roleService.getAllRoles());
-     return "users";
- }
+    @GetMapping(value = "/admin/new")
+    public String addUser(ModelMap modelMap) {
+        modelMap.addAttribute("addUser", new User());
+        modelMap.addAttribute("allRoles", roleService.getAllRoles());
+        return "users";
+    }
 
     @PostMapping(value = "/admin")
     public String addUserBd(@ModelAttribute("addUser") User user,
                             @RequestParam(value = "select_role", required = false) String[] role) {
         Set<Role> rol = new HashSet<>();
         for (String s : role) {
-            if (s.equals("ROLE_ADMIN")) {
-                rol.add(roleService.getAllRoles().get(0));
-            } else if (s.equals("ROLE_USER")) {
-                rol.add(roleService.getAllRoles().get(1));
-            }
+            rol.add(roleService.findByRole(s));
         }
 
         user.setRoles(rol);
@@ -65,8 +61,8 @@ public class MainController {
 
     @PatchMapping(value = "/{id}")
     public String update(@ModelAttribute("user") User user,
-                         @RequestParam(value = "select_roles", required = false) String[] role) {
-        userService.update(user, role);
+                         @RequestParam(value = "select_roles", required = false) String[] roles) {
+        userService.update(user,roles);
         return "redirect:/admin";
     }
 

@@ -46,11 +46,7 @@ public class UserServiceImpl implements UserService {
     public void update(User user, String[] role) {
         Set<Role> rol = new HashSet<>();
         for (String s : role) {
-            if (s.equals("ROLE_ADMIN")) {
-                rol.add(showRole(1));
-            } else {
-                rol.add(showRole(2));
-            }
+            rol.add(roleRepository.findByRole(s));
         }
         user.setRoles(rol);
         userRepository.save(user);

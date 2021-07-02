@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
-public class RoleServiceImpl  implements RoleService{
+public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
@@ -15,4 +16,10 @@ public class RoleServiceImpl  implements RoleService{
     public List<Role> getAllRoles() {
         return roleRepository.findAll();
     }
+
+    @Override
+    public Role findByRole(String roleName) {
+        return roleRepository.findByRole(roleName);
+    }
+
 }

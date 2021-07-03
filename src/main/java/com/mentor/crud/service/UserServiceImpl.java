@@ -25,8 +25,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         userRepository.save(user);
+        return user;
     }
 
     @Override
@@ -43,13 +44,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user, String[] role) {
-        Set<Role> rol = new HashSet<>();
-        for (String s : role) {
-            rol.add(roleRepository.findByRole(s));
-        }
-        user.setRoles(rol);
-        userRepository.save(user);
+    public User update(User user) {
+        return userRepository.save(user);
     }
 
     @Override

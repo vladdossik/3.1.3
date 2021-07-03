@@ -1,10 +1,6 @@
 package com.mentor.crud.controller;
 
-import com.mentor.crud.model.Role;
 import com.mentor.crud.model.User;
-import com.mentor.crud.service.RoleServiceImpl;
-import com.mentor.crud.service.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;

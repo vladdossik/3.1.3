@@ -10,7 +10,6 @@ $(document).ready(function () {
             roles: getRole("#selectRole")
 
         }
-        console.log(user);
         fetch("api/newUser", {
             method: "POST",
             headers: {
@@ -63,7 +62,6 @@ function restartAllUser() {
             response.json().then(data => data.forEach(function (item, i, data) {
                 let TableRow = createTableRow(item);
                 UserTableBody.append(TableRow);
-
             }));
         }).catch(error => {
         console.log(error);
@@ -76,7 +74,6 @@ document.addEventListener('click', function (event) {
         let href = $(event.target).attr("href");
         delModalButton(href)
     }
-
 
 
     if ($(event.target).hasClass('eBtn')) {
@@ -95,21 +92,19 @@ document.addEventListener('click', function (event) {
     }
     if ($(event.target).hasClass('editButton')) {
         let user = {
-            id:$('#id').val(),
-            firstName:$('#firstNameEd').val(),
-            lastName:$('#lastNameEd').val(),
-            email:$('#emailEd').val(),
-            userName:$('#userNameEd').val(),
-            password:$('#passwordEd').val(),
+            id: $('#id').val(),
+            firstName: $('#firstNameEd').val(),
+            lastName: $('#lastNameEd').val(),
+            email: $('#emailEd').val(),
+            userName: $('#userNameEd').val(),
+            password: $('#passwordEd').val(),
             roles: getRole("#selectRoleEd")
-
         }
         editModalButton(user)
-        console.log(user);
     }
 
     if ($(event.target).hasClass('logout')) {
-      logout();
+        logout();
     }
     if ($(event.target).hasClass('btnUserTable')) {
         userTable();
@@ -125,6 +120,7 @@ function delModalButton(href) {
         }
     }).then(() => restartAllUser());
 }
+
 function editModalButton(user) {
     fetch("api/edit", {
         method: "PUT",
@@ -138,13 +134,16 @@ function editModalButton(user) {
         restartAllUser();
     })
 }
+
 function openTabById(tab) {
     $('.nav-tabs a[href="#' + tab + '"]').tab('show');
 }
-function logout(){
+
+function logout() {
     document.location.replace("/logout");
 }
-function userTable(){
+
+function userTable() {
     document.location.replace("/user");
 }
 

@@ -146,5 +146,3 @@ function logout() {
 function userTable() {
     document.location.replace("/user");
 }
-
-

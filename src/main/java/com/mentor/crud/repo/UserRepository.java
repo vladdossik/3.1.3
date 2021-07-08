@@ -1,11 +1,12 @@
 package com.mentor.crud.repo;
 
 import com.mentor.crud.model.User;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
 
-@Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-
-    User findByUserName(String username);
+    @EntityGraph(attributePaths = {"roles"})
+    @Query("SELECT u FROM User u where u.userName =:userName")
+    User findByUserName(String userName);
 }

@@ -144,7 +144,7 @@ function logout() {
 }
 
 function userTable() {
-    document.location.replace("/user");
+    document.location.replace("/login");
 }
 
 

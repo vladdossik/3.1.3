@@ -1,9 +1,11 @@
 package com.mentor.crud.model;
 
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,7 +34,7 @@ public class User implements UserDetails {
     private String password;
 
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
 
@@ -91,10 +93,9 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return (Collection<? extends GrantedAuthority>) Hibernate.unproxy(roles);
     }
 
     public String getPassword() {
@@ -139,7 +140,7 @@ public class User implements UserDetails {
     }
 
     public Set<Role> getRoles() {
-        return roles;
+        return (Set<Role>) Hibernate.unproxy(roles);
     }
 
     public void setRoles(Set<Role> roles) {

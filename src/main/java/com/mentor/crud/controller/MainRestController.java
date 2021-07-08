@@ -5,6 +5,7 @@ import com.mentor.crud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +30,8 @@ public class MainRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getOne(@PathVariable Integer id) {
-        User user = userService.show(id);
+       // User user = userService.show(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

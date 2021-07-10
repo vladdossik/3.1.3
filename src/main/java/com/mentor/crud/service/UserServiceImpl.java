@@ -21,9 +21,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private RoleRepository roleRepository;
-    EntityManagerFactory emf;
 
     @Override
     public List<User> getAllUsers() {
@@ -56,7 +53,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUserName(String userName) {
         User user = userRepository.findByUserName(userName);
-
         return user;
     }
 }

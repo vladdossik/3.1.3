@@ -30,7 +30,6 @@ public class MainRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getOne(@PathVariable Integer id) {
-       // User user = userService.show(id);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

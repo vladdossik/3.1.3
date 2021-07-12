@@ -86,7 +86,7 @@ document.addEventListener('click', function (event) {
             $(".editUser #lastNameEd").val(user.lastName);
             $(".editUser #emailEd").val(user.email);
             $(".editUser #userNameEd").val(user.userName);
-            $(".editUser #passwordEd").val(user.password);
+            $(".editUser #passwordEd").val("");
             $(".editUser #selectRoleEd").val(user.roles);
         });
     }
@@ -120,7 +120,6 @@ function delModalButton(href) {
         }
     }).then(() => restartAllUser());
 }
-
 function editModalButton(user) {
     fetch("api/edit", {
         method: "PUT",

@@ -34,6 +34,7 @@ public class MainRestController {
     @GetMapping("/{id}")
     public ResponseEntity<User> getOne(@PathVariable Integer id) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -46,6 +47,7 @@ public class MainRestController {
 
     @PutMapping("/edit")
     public ResponseEntity<String> update(@RequestBody User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.update(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
